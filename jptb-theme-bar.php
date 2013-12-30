@@ -10,11 +10,6 @@ License: GPL
 */
 
 
- function jptb_frontend_js() {
-    wp_enqueue_script( 'jptb-js', plugin_dir_url( __FILE__ ).'jptb-frontend.js', array('jquery'), null, true );
- }
- add_action( 'wp_enqueue_scripts', 'jptb_frontend_js');
-
 //INSERT THEME BAR HTML
 require_once ( 'jptb-theme-bar-html.php' );
 
