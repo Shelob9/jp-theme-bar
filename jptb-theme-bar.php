@@ -14,7 +14,7 @@ License: GPL
 require_once ( 'jptb-theme-bar-html.php' );
 
 //INSERT THEME BAR CSS
-require_once ( 'jptb-theme-bar-css.php' );
+require_once( 'jptb-frontend.php' );
 
 //THE PLUGIN OPTIONS PAGE
 require_once ( 'jptb-theme-bar-options.php' );
