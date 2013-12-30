@@ -217,7 +217,7 @@ function jptb_html() {
 			}
 			</script>
             <div id="jptb_demo" style="height:28px; margin-top:60px; color:<?php echo get_option('jptb_text_colour'); ?>; background-color:<?php echo get_option('jptb_bg_colour') ?>;"><p id="jptb_demo_p" style="padding-left:10px; padding-top:5px;"><?php echo get_option('jptb_label'); ?></p></div>
-            
+            <div class=""><strong>Note:</strong> Demo is broken for label colors.</div>
             <?php submit_button(); ?>
         </form>
     </div><!-- .wrap -->
