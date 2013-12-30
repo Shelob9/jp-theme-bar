@@ -1,27 +1,21 @@
 <?php
-/*==================================================Creating the options page
- * Now we have a page for options.  There's nothing in it yet, but that will come.
- * First we have to explain to WordPress what we're going to make it do
- * It has to know what it will be dealing with before it will populate the page
+/**
+ * Admin Page and settings
+ *
+ * @TODO Make OOP
  */
-add_action( 'admin_menu', 'theme_bar_page' );
 
-function theme_bar_page() {
-	$page = add_options_page('jptb Theme Bar', 'jptb Theme bar', 'administrator', 'jptb_Menu_ID', 'jptb_html');
+add_action( 'admin_menu', 'jptb_settings_page' );
+
+//add settings page
+function jptb_settings_page() {
+	$page = add_options_page('JP Theme Bar', 'JP Theme bar', 'administrator', 'jptb_Menu_ID', 'jptb_html');
 	add_action( 'admin_print_styles-' . $page, 'my_admin_scripts' );
 }
 
-/*==================================================Setting up the options page
- * This is where we deal with the Settings which are organised within Fields which 
- * are themselves organised in Sections.  These are the things WordPress needs to know,
- * Once it knows these things it will be happy and begin to play ball with the user!
- * Page
- * 		Section
- *			Field
- *				Setting
- */
-add_action( 'admin_init', 'register_jptb_settings' );
-function register_jptb_settings() {
+//add settings
+add_action( 'admin_init', 'jptb_register_settings' );
+function jptb_register_settings() {
 	
 	add_settings_section(
 		'jptb_themeChoice_sectionID',
@@ -30,11 +24,11 @@ function register_jptb_settings() {
 		'jptb_Menu_ID'
 	);
 	
-	//Label text field
+	//LABEL TEXT
 	add_settings_field(
 		'jptb_label',
-		'Label text',
-		'jptb_label_HTML',
+		'Label for theme bar',
+		'jptb_label_cb',
 		'jptb_Menu_ID',
 		'jptb_themeChoice_sectionID'
 	);
@@ -60,39 +54,41 @@ function register_jptb_settings() {
 		register_setting( 'jptb_Menu_ID', $uniqueOptionName );
 	}
 	
-	//the main colour field
+	//MAIN BG COLOUR
 	add_settings_field(
 		'jptb_bg_colour',
 		'Background Colour',
-		'colour_field_HTML',
+		'jptb_bg_cb',
 		'jptb_Menu_ID',
 		'jptb_themeChoice_sectionID'
 	);
 	register_setting( 'jptb_Menu_ID', 'jptb_bg_colour' );
 
+    //MAIN TXT COLOUR
 	add_settings_field(
 		'jptb_text_colour',
 		'Text Colour',
-		'Tcolour_field_HTML',
+		'jptb_txt_cb',
 		'jptb_Menu_ID',
 		'jptb_themeChoice_sectionID'
 	);
 	register_setting( 'jptb_Menu_ID', 'jptb_text_colour' );
 	
-	//the label colour field
+	//LABEL BG COLOUR
 	add_settings_field(
 		'jptb_label_bg_colour',
 		'Label Background Colour',
-		'label_colour_field_HTML',
+		'jptb_label_bg_cb',
 		'jptb_Menu_ID',
 		'jptb_themeChoice_sectionID'
 	);
 	register_setting( 'jptb_Menu_ID', 'jptb_label_bg_colour' );
 
+    //LABEL TEXT COLOR
 	add_settings_field(
 		'jptb_label_text_colour',
 		'Label Text Colour',
-		'label_Tcolour_field_HTML',
+		'jptb_label_txt_cb',
 		'jptb_Menu_ID',
 		'jptb_themeChoice_sectionID'
 	);
@@ -105,12 +101,12 @@ function jptb_themeChoice_HTML() {
 	//echo 'Some help text goes here.';
 }
 
-//==================================================================================
-//==========================================         HTML CALLBACKS         ========
-//==================================================================================
+/*
+ * CALLBACKS
+ */
 
 //LABEL TEXT HTML
-function jptb_label_HTML() {
+function jptb_label_cb() {
 	$current_label = get_option('jptb_label');
 	if (is_null($current_label)) {
 		$current_label = 'My themes:';
@@ -129,8 +125,8 @@ function Theme_field_HTML($uniqueOptionName) {
 	echo "<input type='checkbox' id='$uniqueOptionName' name='$uniqueOptionName' value='1' $checked/>";
 }
 
-//MAIN COLOUR HTML
-function colour_field_HTML() {
+//MAIN BG COLOR
+function jptb_bg_cb() {
 	$current_colour = get_option('jptb_bg_colour');
 	if (is_null($current_colour)) {
 		$current_colour = '#000';
@@ -139,7 +135,9 @@ function colour_field_HTML() {
 	echo "<input type='text' id='jptb_bg_colour' name='jptb_bg_colour' onblur='changeDemoBgColour()' value='" . $current_colour . "'/>";
 	echo '<div style="position: absolute; left:190px; bottom:-101px;" id="colorpicker"></div></div>';
 }
-function Tcolour_field_HTML() {
+
+//MAIN TXT COLOR
+function jptb_txt_cb() {
 	$current_tcolour = get_option('jptb_text_colour');
 	if (is_null($current_tcolour)) {
 		$current_tcolour = '#fff';
@@ -149,8 +147,8 @@ function Tcolour_field_HTML() {
 	echo '<div style="position: absolute; left:190px; bottom:-60px;" id="colorpicker2"></div></div>';
 }
 
-//LABEL COLOUR HTML
-function label_colour_field_HTML() {
+//LABEL BG COLOUR
+function jptb_label_bg_cb() {
 	$current_colour = get_option('jptb_label_bg_colour');
 	if (is_null($current_colour)) {
 		$current_colour = '#fff';
@@ -159,7 +157,9 @@ function label_colour_field_HTML() {
 	echo "<input type='text' id='jptb_label_bg_colour' name='jptb_label_bg_colour' onblur='changeDemoLabelBgColour()' value='" . $current_colour . "'/>";
 	echo '<div style="position: absolute; left:190px; bottom:-101px;" id="colorpicker"></div></div>';
 }
-function label_Tcolour_field_HTML() {
+
+//LABEL TXT COLOR
+function jptb_label_txt_cb() {
 	$current_tcolour = get_option('jptb_label_text_colour');
 	if (is_null($current_tcolour)) {
 		$current_tcolour = '#000';
@@ -180,7 +180,7 @@ function my_admin_scripts() {
 function jptb_html() {
 	?>
     <div class="wrap">
-        <h2>jptb Theme Bar Settings</h2>
+        <h2>JP Theme Bar Settings</h2>
         <form action="options.php" method="POST">
             <?php settings_fields( 'jptb_Menu_ID' ); ?>
             <?php do_settings_sections( 'jptb_Menu_ID' ); ?>
