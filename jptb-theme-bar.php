@@ -10,10 +10,7 @@ License: GPL
 */
 
 
-//INSERT THEME BAR HTML
-require_once ( 'jptb-theme-bar-html.php' );
-
-//INSERT THEME BAR CSS
+//Include the front-end
 require_once( 'jptb-frontend.php' );
 
 //THE PLUGIN OPTIONS PAGE
