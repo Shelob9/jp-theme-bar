@@ -26,7 +26,7 @@ function jptb_register_settings() {
 	//LABEL TEXT
 	add_settings_field(
 		'jptb_label',
-		'Label for theme bar',
+		'Label For Theme Bar',
 		'jptb_label_cb',
 		'jptb_Menu_ID',
 		'jptb_themeChoice_sectionID'
