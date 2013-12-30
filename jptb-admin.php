@@ -181,6 +181,7 @@ function jptb_html() {
 	?>
     <div class="wrap">
         <h2>JP Theme Bar Settings</h2>
+        <Strong>This plugin requires the plugin <a href="http://wordpress.org/plugins/theme-test-drive/" target="_blank">Theme Test Drive</a> by <a href="http://www.prelovac.com/vladimir/" target="_blank">Vladimir Prelovac</a> in order for the theme switching to work.</Strong>
         <form action="options.php" method="POST">
             <?php settings_fields( 'jptb_Menu_ID' ); ?>
             <?php do_settings_sections( 'jptb_Menu_ID' ); ?>
