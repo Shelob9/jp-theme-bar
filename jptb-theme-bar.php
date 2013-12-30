@@ -7,8 +7,12 @@ Version: 0.0.1
 Author: Josh Pollock
 Author URI: http://www.JoshPress.net
 License: GPLv2+
+License URI:   http://www.gnu.org/licenses/gpl-2.0.html
 */
 /**
+ * Copyright 2013 Josh Pollock
+ * Licensed under the terms of the GPL v2 or later.
+ *
  * This plugin is based on IJM Theme Switcher Bar  v2.0 (http://iainjmccallum.com/wordpress/live-demo-theme-bar/)
  *  by Iain J McCallum (http://www.iainjmccallum.com/)
  */
