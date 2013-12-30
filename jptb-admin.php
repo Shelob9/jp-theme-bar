@@ -10,7 +10,6 @@ add_action( 'admin_menu', 'jptb_settings_page' );
 //add settings page
 function jptb_settings_page() {
 	$page = add_options_page('JP Theme Bar', 'JP Theme bar', 'administrator', 'jptb_Menu_ID', 'jptb_html');
-	add_action( 'admin_print_styles-' . $page, 'my_admin_scripts' );
 }
 
 //add settings
@@ -170,7 +169,8 @@ function jptb_label_txt_cb() {
 }
 
 //COLOUR SCRIPTS
-function my_admin_scripts() {
+add_action( 'admin_enqueue_scripts', 'jptb_admin_scripts');
+function jptb_admin_scripts() {
     wp_enqueue_style( 'farbtastic' );
     wp_enqueue_script( 'farbtastic' );
     wp_enqueue_script( 'jptb_colour_script', plugins_url() . '/jptb-theme-bar-pro/jptb_colour.js', array( 'farbtastic', 'jquery' ) );
