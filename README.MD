@@ -4,7 +4,7 @@ A WordPress plugin that adds a theme switcher / theme demo bar to the bottom of 
 
 This plugin requires the plugin Theme Test Drive (http://wordpress.org/plugins/theme-test-drive/)
 Theme Test Drive is by Vladimir Prelovac (http://www.prelovac.com/vladimir/)
-If Theme Test Drive is installed THEME SWITCHING WILL NOT WORK
+If Theme Test Drive is not installed THEME SWITCHING WILL NOT WORK.
 
 
 Status and TODO

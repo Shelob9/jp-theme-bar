@@ -32,7 +32,7 @@ And again, revel in this super-simple theme switcher by going theme switcher cra
 = After installation =
 This plugin requires the plugin Theme Test Drive (http://wordpress.org/plugins/theme-test-drive/)
 Theme Test Drive is by Vladimir Prelovac (http://www.prelovac.com/vladimir/)
-If Theme Test Drive is installed THEME SWITCHING WILL NOT WORK
+If Theme Test Drive is not installed THEME SWITCHING WILL NOT WORK
 
 In Apperance->JP THEME BAR you can specify the following settings:
 "Label For Theme Bar" - The text that will preceded the list of themes. For example, "Switch Themes."
