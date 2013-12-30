@@ -1,15 +1,11 @@
 <?php
-/* This spits out the html for the jptb-Theme-bar.
-	 * It it set up as a ul within a div.
-	 * I have put together a loop to go through every theme installed.
-	 * The loop lists the name of each theme within an <a> linking to a live demo on the current site. 
-	 * The link runs the original 'Easy Theme Switcher' code above.
-	 * Finally I have added a link to end the session and return the site to normal.
-	 */
+/* This spits out the html for the jptb-Theme-bar. */
 add_action( 'wp_footer', 'jptb_insert_html_bar' );
 	function jptb_insert_html_bar () {
 		$siteurl = get_bloginfo('url');
-		$themes=wp_get_themes();
+        $themes = wp_get_themes( array(
+            'allowed' => true
+        ) );
 		$barLabel = get_option('jptb_label');
 		echo "<div id=\"jptb-theme-bar\">";
 		echo "<ul>";
@@ -18,13 +14,12 @@ add_action( 'wp_footer', 'jptb_insert_html_bar' );
 					echo "<p id='jptb_label'>" . $barLabel . "</p>";
 			echo "</li>";
 			
-			//Thank you to MichaelH for a way to get the theme names!
+
 			foreach ($themes as $theme ) {
-				//preperation
 				$themename = $theme['Name'];
-				$link = $siteurl."/?theme=".$themename;
 				$noSpaceName = strtr( $themename," -","__" );
 				$nocapsname = strtolower($noSpaceName);
+				$link = $siteurl."/?theme=".$theme->stylesheet;
 				$uniqueOptionName = "jptb_" . $nocapsname;
        			$jptb_option_value = get_option($uniqueOptionName);
 				if ($jptb_option_value == '1') {
