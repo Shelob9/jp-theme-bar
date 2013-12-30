@@ -1,9 +1,9 @@
 jQuery(document).ready(function($) {
     $('#colorpicker').hide();
-    $('#colorpicker').farbtastic('#ijmtb_bg_colour');
+    $('#colorpicker').farbtastic('#jptb_bg_colour');
 
 
-    $('#ijmtb_bg_colour').click(function() {
+    $('#jptb_bg_colour').click(function() {
         $('#colorpicker').fadeIn();
     });
 
@@ -18,9 +18,9 @@ jQuery(document).ready(function($) {
 	
 
 	$('#colorpicker2').hide();
-	$('#colorpicker2').farbtastic('#ijmtb_text_colour');
+	$('#colorpicker2').farbtastic('#jptb_text_colour');
 	
-	$('#ijmtb_text_colour').click(function() {
+	$('#jptb_text_colour').click(function() {
         $('#colorpicker2').fadeIn();
     });
 	$(document).mousedown(function() {
@@ -36,10 +36,10 @@ jQuery(document).ready(function($) {
     //label colours
     
     $('#colorpicker').hide();
-    $('#colorpicker3').farbtastic('p#ijmtb_label');
+    $('#colorpicker3').farbtastic('p#jptb_label');
 
 
-    $('#ijmtb_bg_colour').click(function() {
+    $('#jptb_bg_colour').click(function() {
         $('#colorpicker').fadeIn();
     });
 
@@ -54,9 +54,9 @@ jQuery(document).ready(function($) {
 	
 
 	$('#colorpicker4').hide();
-	$('#colorpicker4').farbtastic('p#ijmtb_label');
+	$('#colorpicker4').farbtastic('p#jptb_label');
 	
-	$('#ijmtb_text_colour').click(function() {
+	$('#jptb_text_colour').click(function() {
         $('#colorpicker4').fadeIn();
     });
 	$(document).mousedown(function() {

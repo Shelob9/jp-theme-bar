@@ -84,20 +84,20 @@ endif;
 
  }
  
- function ijmtb_frontend_js() {
-    wp_enqueue_script( 'ijmtb-js', plugin_dir_url( __FILE__ ).'ijm-frontend.js', array('jquery'), null, true );
+ function jptb_frontend_js() {
+    wp_enqueue_script( 'jptb-js', plugin_dir_url( __FILE__ ).'jptb-frontend.js', array('jquery'), null, true );
  }
- add_action( 'wp_enqueue_scripts', 'ijmtb_frontend_js');
+ add_action( 'wp_enqueue_scripts', 'jptb_frontend_js');
 //====================   Iain's addition   ====================
 
 //INSERT THEME BAR HTML
-require_once ( 'ijm-theme-bar-html.php' );
+require_once ( 'jptb-theme-bar-html.php' );
 
 //INSERT THEME BAR CSS
-require_once ( 'ijm-theme-bar-css.php' );
+require_once ( 'jptb-theme-bar-css.php' );
 
 //THE PLUGIN OPTIONS PAGE
-require_once ( 'ijm-theme-bar-options.php' );
+require_once ( 'jptb-theme-bar-options.php' );
 
 
 
