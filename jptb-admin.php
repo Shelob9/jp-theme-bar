@@ -9,7 +9,7 @@ add_action( 'admin_menu', 'jptb_settings_page' );
 
 //add settings page
 function jptb_settings_page() {
-	$page = add_options_page('JP Theme Bar', 'JP Theme bar', 'administrator', 'jptb_Menu_ID', 'jptb_html');
+    add_theme_page('JP Theme Bar', 'JP Theme Bar', 'administrator', 'jptb_Menu_ID', 'jptb_html');
 }
 
 //add settings
