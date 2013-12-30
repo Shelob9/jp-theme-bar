@@ -13,5 +13,5 @@ License: GPL
 //Include the front-end
 require_once( 'jptb-frontend.php' );
 
-//THE PLUGIN OPTIONS PAGE
-require_once ( 'jptb-theme-bar-options.php' );
+//Include Admin
+require_once( 'jptb-admin.php' );
