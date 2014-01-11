@@ -2,7 +2,9 @@
 /**
  * Admin Page and settings
  *
- * @TODO Make OOP
+ * @package jptb
+ * @author Josh Pollock
+ * @since 0.0.2
  */
 
 namespace jptb;
@@ -236,6 +238,7 @@ class admin {
 /**
  * Initialize admin class
  *
- * @since 0.0.2
+ * @package jptb
+ * @author Josh Pollock
  */
 new admin();
