@@ -182,7 +182,8 @@ class admin {
     function jptb_admin_scripts() {
         wp_enqueue_style( 'farbtastic' );
         wp_enqueue_script( 'farbtastic' );
-        wp_enqueue_script( 'jptb_colour_script', plugins_url() . '/jptb-theme-bar-pro/jptb_colour.js', array( 'farbtastic', 'jquery' ) );
+        wp_enqueue_script( 'jptb_colour_script', plugin_dir_url( __FILE__ ).'jptb_colour.js', array( 'farbtastic', 'jquery' ) );
+        wp_enqueue_style( 'jptb-admin',  plugin_dir_url( __FILE__ ).'css/jptb-admin.css' );
     }
 
     /**
