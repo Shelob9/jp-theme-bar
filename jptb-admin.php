@@ -14,8 +14,20 @@ class admin {
     function __construct() {
         add_action( 'admin_menu', array( $this, 'jptb_settings_page' ) );
         add_action( 'admin_init', array( $this, 'jptb_register_settings' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'farb' ) );
     }
 
+    /**
+     * Add Farbtastic rez for colour pickers
+     *
+     * @package jptb
+     * @since 0.0.2
+     */
+    function farb() {
+        wp_enqueue_style( 'farbtastic' );
+        wp_enqueue_script( 'farbtastic' );
+        wp_enqueue_script( 'jptb-admin', plugin_dir_url( __FILE__ ).'js/jptb-admin.js', array('jquery', 'farbtastic' ), null, true );
+    }
     //add settings page
     function jptb_settings_page() {
         add_theme_page('JP Theme Bar', 'JP Theme Bar', 'administrator', 'jptb_settings', array( $this, 'html') );
@@ -149,8 +161,8 @@ class admin {
             $current_colour = '#000';
         }
         echo '<div class="color-picker" style="position: relative;">';
-        echo "<input type='text' id='jptb_bg_colour' name='jptb_bg_colour' onblur='changeDemoBgColour()' value='" . $current_colour . "'/>";
-        echo '<div style="position: absolute; left:190px; bottom:-101px;" id="colorpicker"></div></div>';
+        echo "<input type='text' id='jptb_bg_colour' name='jptb_bg_colour'  value='" . $current_colour . "'/>";
+        echo '<div style="position: absolute; left:190px; bottom:-101px;" id="farb-cp-1"></div></div>';
     }
 
     //MAIN TXT COLOR
@@ -159,9 +171,9 @@ class admin {
         if (is_null($current_tcolour)) {
             $current_tcolour = '#fff';
         }
-        echo '<div class="color-picker2" style="position: relative;">';
-        echo "<input type='text' id='jptb_text_colour' name='jptb_text_colour' onblur='changeDemoTextColour()' value='" . $current_tcolour . "'/>";
-        echo '<div style="position: absolute; left:190px; bottom:-60px;" id="colorpicker2"></div></div>';
+        echo '<div class="color-picker" style="position: relative;">';
+        echo "<input type='text' id='jptb_text_colour' name='jptb_text_colour' value='" . $current_tcolour . "'/>";
+        echo '<div style="position: absolute; left:190px; bottom:-60px;" id="farb-cp-2"></div></div>';
     }
 
     //LABEL BG COLOUR
@@ -170,9 +182,9 @@ class admin {
         if (is_null($current_colour)) {
             $current_colour = '#fff';
         }
-        echo '<div class="color-picker3" style="position: relative;">';
-        echo "<input type='text' id='jptb_label_bg_colour' name='jptb_label_bg_colour' onblur='changeDemoLabelBgColour()' value='" . $current_colour . "'/>";
-        echo '<div style="position: absolute; left:190px; bottom:-101px;" id="colorpicker3"></div></div>';
+        echo '<div class="color-picker" style="position: relative;">';
+        echo "<input type='text' id='jptb_label_bg_colour' name='jptb_label_bg_colour'  value='" . $current_colour . "'/>";
+        echo '<div style="position: absolute; left:190px; bottom:-101px;" id="farb-cp-3"></div></div>';
     }
 
     //LABEL TXT COLOR
@@ -181,9 +193,9 @@ class admin {
         if (is_null($current_tcolour)) {
             $current_tcolour = '#000';
         }
-        echo '<div class="color-picker4" style="position: relative;">';
-        echo "<input type='text' id='jptb_label_text_colour' name='jptb_label_text_colour' onblur='changeDemoLabelTextColour()' value='" . $current_tcolour . "'/>";
-        echo '<div style="position: absolute; left:190px; bottom:-60px;" id="colorpicker4"></div></div>';
+        echo '<div class="color-picker" style="position: relative;">';
+        echo "<input type='text' id='jptb_label_text_colour' name='jptb_label_text_colour'  value='" . $current_tcolour . "'/>";
+        echo '<div style="position: absolute; left:190px; bottom:-60px;" id="farb-cp-4"></div></div>';
     }
 
     //FORM HTML
