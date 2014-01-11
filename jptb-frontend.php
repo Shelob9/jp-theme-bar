@@ -57,7 +57,23 @@ class frontend {
      */
     function inline_style() {
         $colours = $this->colours();
-        $inline_style = "
+        $position = "
+            #jptb-theme-bar {
+                bottom:0px;
+                position:fixed;
+                left:0px;
+                z-index:9999;
+            }
+        ";
+        /**
+         * Filter the position of the bar.
+         *
+         * @param   string  $positioning    The CSS, including selector (#jptb-themebar), to position theme bar.
+         *
+         * @since 0.0.2
+         */
+        $position = apply_filters( 'jptb_bar_position', $position );
+        $main_inline_style = "
                 #jptb-theme-bar {
                     background-color: ".$colours[ 'bg_colour'].";
                     color: ".$colours[ 'text_colour' ].";
@@ -76,6 +92,7 @@ class frontend {
                     color: ".$colours[ 'label_text_colour' ].";
                 }
             ";
+        $inline_style = $position.$main_inline_style;
         /**
          * Filter the styles.
          *
@@ -83,7 +100,7 @@ class frontend {
          *
          * @param   $string $inline_style A style sheet (with no <style></style>
          */
-        $inline_style = apply_filters( 'jptb_bar_style', $inline_style );
+        $inline_style = apply_filters( 'jptb_bar_inline_style', $inline_style );
         //add these styles inline
         wp_add_inline_style( 'jptb', $inline_style );
     }
