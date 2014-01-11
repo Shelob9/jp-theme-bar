@@ -14,7 +14,6 @@ class admin {
     function __construct() {
         add_action( 'admin_menu', array( $this, 'jptb_settings_page' ) );
         add_action( 'admin_init', array( $this, 'jptb_register_settings' ) );
-        add_action( 'admin_enqueue_scripts', array( $this, 'jptb_admin_scripts' ) );
     }
 
     //add settings page
@@ -163,7 +162,7 @@ class admin {
         }
         echo '<div class="color-picker" style="position: relative;">';
         echo "<input type='text' id='jptb_label_bg_colour' name='jptb_label_bg_colour' onblur='changeDemoLabelBgColour()' value='" . $current_colour . "'/>";
-        echo '<div style="position: absolute; left:190px; bottom:-101px;" id="colorpicker"></div></div>';
+        echo '<div style="position: absolute; left:190px; bottom:-101px;" id="colorpicker3"></div></div>';
     }
 
     //LABEL TXT COLOR
@@ -173,97 +172,8 @@ class admin {
             $current_tcolour = '#000';
         }
         echo '<div class="color-picker2" style="position: relative;">';
-        echo "<input type='text' id='jptb_label_text_colour' name='jptb_label_text_colour' onblur='changeDemoLabeLTextColour()' value='" . $current_tcolour . "'/>";
-        echo '<div style="position: absolute; left:190px; bottom:-60px;" id="colorpicker2"></div></div>';
-    }
-
-    //COLOUR SCRIPTS
-
-    function jptb_admin_scripts() {
-        wp_enqueue_style( 'farbtastic' );
-        wp_enqueue_script( 'farbtastic' );
-        wp_enqueue_script( 'jptb_colour_script', plugin_dir_url( __FILE__ ).'jptb_colour.js', array( 'farbtastic', 'jquery' ) );
-        wp_enqueue_style( 'jptb-admin',  plugin_dir_url( __FILE__ ).'css/jptb-admin.css' );
-    }
-
-    /**
-     * Create an array of colours from the settings.
-     *
-     * @package jptb
-     * @since 0.0.2
-     *
-     * @return array $colours All the colours we need for styles
-     */
-    static function colours() {
-        $colours = array(
-            'bg_colour'         => get_option('jptb_bg_colour'),
-            'text_colour'       => get_option('jptb_text_colour'),
-            'label_bg_colour'   => get_option('jptb_label_bg_colour'),
-            'label_text_colour' => get_option('jptb_label_text_colour')
-        );
-        /**
-         * Filter to overide colours for the switcher bar
-         *
-         * @param   array   $colours    An array of colours
-         *
-         * @since 0.0.1
-         */
-        $colours = apply_filters( 'jptb_bar_colours', $colours );
-        return $colours;
-    }
-
-    function bar_style() {
-        //get the colour options
-        $colours = self::colours();
-        //build each part we need in an var named for its id.
-        $jptb_demo = "height:28px; margin-top:60px; color:".$colours[ 'text_colour' ].";  background-color: ".$colours[ 'bg_colour' ].";";
-        $jptb_demo_p = "padding-left:10px; padding-top:5px; color:".$colours[ 'text_colour' ].";";
-        $jptb_label = "color:".$colours[ 'label_text_colour' ]."; background-color:".$colours[ 'label_bg_colour' ].";";
-        //put each one into an array and return it.
-        $bar_style = array(
-            'jptb_demo'     => $jptb_demo,
-            'jptb_demo_p'   => $jptb_demo_p,
-            'jptb_label'    => $jptb_label,
-        );
-        return $bar_style;
-    }
-
-    /**
-     * Build the preview bar
-     *
-     * @package jptb
-     * @since 0.0.2
-     *
-     * @return string   $preview_bar    The preview bar
-     */
-    function preview_bar() {
-        $barLabel = 'LABELS!';
-        //get the inline style
-        $bar_style = $this->bar_style();
-        //<p id="jptb_demo_p" style="'.$bar_style[ 'jptb_demo_p' ].'>
-        $preview_bar = '
-            <div id="jptb_demo" style="'.$bar_style[ 'jptb_demo' ].' ">
-                    <p id="jptb_label" style="'.$bar_style[ 'jptb_label'].'">';
-        $preview_bar .= $barLabel;
-        $preview_bar .= '
-                    <p>
-                    <p>
-            ';
-        $preview_bar .= __( 'Theme Name', 'jptb' );
-        $preview_bar .= '
-                    </p>
-                </ul>
-            </div><!--/#jptb_demo-->
-        ';
-        /**
-         * Overide the preview bar
-         *
-         * @param   string  $preview_bar    The preview bar
-         *
-         * @since 0.0.2
-         */
-        $preview_bar = apply_filters( 'jptb_preview_bar', $preview_bar );
-        return $preview_bar;
+        echo "<input type='text' id='jptb_label_text_colour' name='jptb_label_text_colour' onblur='changeDemoLabelTextColour()' value='" . $current_tcolour . "'/>";
+        echo '<div style="position: absolute; left:190px; bottom:-60px;" id="colorpicker4"></div></div>';
     }
 
     //FORM HTML
@@ -275,39 +185,6 @@ class admin {
             <form action="options.php" method="POST">
                 <?php settings_fields( 'jptb_Menu_ID' ); ?>
                 <?php do_settings_sections( 'jptb_Menu_ID' ); ?>
-                <script>
-                function updateLabelText() {
-                    var labtext = document.getElementById('jptb_label').value;
-                    document.getElementById('jptb_demo_p').innerHTML=labtext;
-                }
-                //when #jptb_text_colour changes, update jptb_demo colour to #jptb_text_colour value
-                function changeDemoTextColour() {
-                    var texthex = document.getElementById('jptb_text_colour').value;
-                    document.getElementById('jptb_demo').style.color=texthex;
-                }
-
-                //when #jptb_bg_colour changes, update jptb_demo background-color to #jptb_bg_colour value
-                function changeDemoBgColour() {
-                    var bghex = document.getElementById('jptb_bg_colour').value;
-                    document.getElementById('jptb_demo').style.backgroundColor=bghex;
-                    document.getElementById('jptb_demo_p').innerhtml="hello";
-                }
-
-
-                //when #jptb_label_text_colour changes, update jptb_demo colour to #jptb_label_text_colour value
-                function changeDemoLabelTextColour() {
-                    var texthex = document.getElementById('jptb_label_text_colour').value;
-                    document.getElementById('jptb_demo').style.color=texthex;
-                }
-
-                //when #jptb_label_bg_colour changes, update jptb_demo background-color to #jptb_label_bg_colour value
-                function changeDemoLabelBgColour() {
-                    var bghex = document.getElementById('jptb_label_bg_colour').value;
-                    document.getElementById('jptb_demo').style.backgroundColor=bghex;
-                    document.getElementById('jptb_demo_p').innerhtml="hello";
-                }
-                </script>
-                <?php echo $this->preview_bar(); ?>
                 <?php submit_button(); ?>
             </form>
         </div><!-- .wrap -->

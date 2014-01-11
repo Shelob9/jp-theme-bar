@@ -18,7 +18,7 @@ class frontend {
      * @since 0.0.1
      */
     function scriptsNstyles() {
-       wp_enqueue_script( 'jptb-js', plugin_dir_url( __FILE__ ).'jptb-frontend.js', array('jquery'), null, true );
+       wp_enqueue_script( 'jptb-js', plugin_dir_url( __FILE__ ).'js/jptb.js', array('jquery'), null, true );
        wp_enqueue_style( 'jptb', plugin_dir_url( __FILE__ ).'css/jptb.css' );
    }
 
@@ -69,7 +69,7 @@ class frontend {
      * @package jptb
      * @since 0.0.1
      */
-    function html_bar () {
+    static function html_bar () {
         //put site's url in a var.
         $siteurl = get_bloginfo('url');
         //get an array of themes.
