@@ -217,11 +217,13 @@ class admin {
         $colours = self::colours();
         //build each part we need in an var named for its id.
         $jptb_demo = "height:28px; margin-top:60px; color:".$colours[ 'text_colour' ].";  background-color: ".$colours[ 'bg_colour' ].";";
-        $jptb_demo_p = "padding-left:10px; padding-top:5px; color:".$colours[ 'label_text_colour' ].";";
+        $jptb_demo_p = "padding-left:10px; padding-top:5px; color:".$colours[ 'text_colour' ].";";
+        $jptb_label = "color:".$colours[ 'label_text_colour' ]."; background-color:".$colours[ 'label_bg_colour' ].";";
         //put each one into an array and return it.
         $bar_style = array(
             'jptb_demo'     => $jptb_demo,
             'jptb_demo_p'   => $jptb_demo_p,
+            'jptb_label'    => $jptb_label,
         );
         return $bar_style;
     }
@@ -235,12 +237,23 @@ class admin {
      * @return string   $preview_bar    The preview bar
      */
     function preview_bar() {
+        $barLabel = 'LABELS!';
         //get the inline style
         $bar_style = $this->bar_style();
+        //<p id="jptb_demo_p" style="'.$bar_style[ 'jptb_demo_p' ].'>
         $preview_bar = '
-            <div id="jptb_demo" style="'.$bar_style[ 'jptb_demo' ].'">
-                <p id="jptb_demo_p" style="'.$bar_style[ 'jptb_demo_p' ].'</p>
-            </div>
+            <div id="jptb_demo" style="'.$bar_style[ 'jptb_demo' ].' ">
+                    <p id="jptb_label" style="'.$bar_style[ 'jptb_label'].'">';
+        $preview_bar .= $barLabel;
+        $preview_bar .= '
+                    <p>
+                    <p>
+            ';
+        $preview_bar .= __( 'Theme Name', 'jptb' );
+        $preview_bar .= '
+                    </p>
+                </ul>
+            </div><!--/#jptb_demo-->
         ';
         /**
          * Overide the preview bar
