@@ -91,9 +91,19 @@ function css () { ?>
             $link = $siteurl."/?theme=".$theme->stylesheet;
             $uniqueOptionName = "jptb_" . $nocapsname;
             $jptb_option_value = get_option($uniqueOptionName);
+            $switch = "<a href=\"$link\">$themename</a>";
+            /**
+             * Filter to change the switching link
+             *
+             * This filter allows you to use a different theme switching plugin, or add your own system.
+             *
+             * @param   string    $switch The complete link, anchor tag and all to do the switch.
+             * @since 0.0.2
+             */
+            $switch = apply_filters( 'jptb_switch', $switch );
             if ($jptb_option_value == '1') {
                 echo "<li>";
-                echo "<a href=\"$link\">$themename</a>";
+                echo $switch;
                 echo "</li>";
             }
         }
