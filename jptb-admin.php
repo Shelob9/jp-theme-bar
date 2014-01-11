@@ -18,28 +18,25 @@ class admin {
 
     //add settings page
     function jptb_settings_page() {
-        add_theme_page('JP Theme Bar', 'JP Theme Bar', 'administrator', 'jptb_Menu_ID', array( $this, 'html') );
+        add_theme_page('JP Theme Bar', 'JP Theme Bar', 'administrator', 'jptb_settings', array( $this, 'html') );
     }
 
     //add settings
     function jptb_register_settings() {
 
         add_settings_section(
-            'jptb_themeChoice_sectionID',
-            'Which themes do you want to show?',
+            'jptb_theme_choice',
+            'Which Themes Do You Want To Show?',
             array( $this, 'themeChoice_HTML' ),
-            'jptb_Menu_ID'
+            'jptb_settings'
         );
 
-        //LABEL TEXT
-        add_settings_field(
-            'jptb_label',
-            'Label For Theme Bar',
-            array( $this, 'label_cb' ),
-            'jptb_Menu_ID',
-            'jptb_themeChoice_sectionID'
+        add_settings_section(
+            'jptb_other_options',
+            'Additional Options',
+            array( $this, 'other_options_HTML' ),
+            'jptb_settings'
         );
-        register_setting( 'jptb_Menu_ID', 'jptb_label' );
 
         $themes=wp_get_themes();
         foreach ($themes as $theme ) {
@@ -54,11 +51,11 @@ class admin {
                 $uniqueOptionName,
                 $themename,
                 array( $this, 'Theme_field_HTML' ),
-                'jptb_Menu_ID',
-                'jptb_themeChoice_sectionID',
+                'jptb_settings',
+                'jptb_theme_choice',
                 $uniqueOptionName
             );
-            register_setting( 'jptb_Menu_ID', $uniqueOptionName );
+            register_setting( 'jptb_settings', $uniqueOptionName );
         }
 
         //MAIN BG COLOUR
@@ -66,46 +63,59 @@ class admin {
             'jptb_bg_colour',
             'Background Colour',
             array( $this, 'bg_cb' ),
-            'jptb_Menu_ID',
-            'jptb_themeChoice_sectionID'
+            'jptb_settings',
+            'jptb_other_options'
         );
-        register_setting( 'jptb_Menu_ID', 'jptb_bg_colour' );
+        register_setting( 'jptb_settings', 'jptb_bg_colour' );
 
         //MAIN TXT COLOUR
         add_settings_field(
             'jptb_text_colour',
             'Text Colour',
             array( $this, 'txt_cb' ),
-            'jptb_Menu_ID',
-            'jptb_themeChoice_sectionID'
+            'jptb_settings',
+            'jptb_other_options'
         );
-        register_setting( 'jptb_Menu_ID', 'jptb_text_colour' );
+        register_setting( 'jptb_settings', 'jptb_text_colour' );
 
         //LABEL BG COLOUR
         add_settings_field(
             'jptb_label_bg_colour',
             'Label Background Colour',
             array( $this, 'label_bg_cb' ),
-            'jptb_Menu_ID',
-            'jptb_themeChoice_sectionID'
+            'jptb_settings',
+            'jptb_other_options'
         );
-        register_setting( 'jptb_Menu_ID', 'jptb_label_bg_colour' );
+        register_setting( 'jptb_settings', 'jptb_label_bg_colour' );
 
         //LABEL TEXT COLOR
         add_settings_field(
             'jptb_label_text_colour',
             'Label Text Colour',
             array( $this, 'label_txt_cb' ),
-            'jptb_Menu_ID',
+            'jptb_settings',
+            'jptb_other_options'
+        );
+        register_setting( 'jptb_settings', 'jptb_label_text_colour' );
+        //LABEL TEXT TO USE
+        add_settings_field(
+            'jptb_other_options',
+            'Label For Theme Bar',
+            array( $this, 'label_cb' ),
+            'jptb_settings',
             'jptb_themeChoice_sectionID'
         );
-        register_setting( 'jptb_Menu_ID', 'jptb_label_text_colour' );
+        register_setting( 'jptb_settings', 'jptb_label' );
 
     }
 
 
     function themeChoice_HTML() {
         //echo 'Some help text goes here.';
+    }
+
+    function other_options_HTML() {
+        //?
     }
 
     /*
@@ -160,7 +170,7 @@ class admin {
         if (is_null($current_colour)) {
             $current_colour = '#fff';
         }
-        echo '<div class="color-picker" style="position: relative;">';
+        echo '<div class="color-picker3" style="position: relative;">';
         echo "<input type='text' id='jptb_label_bg_colour' name='jptb_label_bg_colour' onblur='changeDemoLabelBgColour()' value='" . $current_colour . "'/>";
         echo '<div style="position: absolute; left:190px; bottom:-101px;" id="colorpicker3"></div></div>';
     }
@@ -171,7 +181,7 @@ class admin {
         if (is_null($current_tcolour)) {
             $current_tcolour = '#000';
         }
-        echo '<div class="color-picker2" style="position: relative;">';
+        echo '<div class="color-picker4" style="position: relative;">';
         echo "<input type='text' id='jptb_label_text_colour' name='jptb_label_text_colour' onblur='changeDemoLabelTextColour()' value='" . $current_tcolour . "'/>";
         echo '<div style="position: absolute; left:190px; bottom:-60px;" id="colorpicker4"></div></div>';
     }
@@ -183,9 +193,10 @@ class admin {
             <h2>JP Theme Bar Settings</h2>
             <Strong>This plugin requires the plugin <a href="http://wordpress.org/plugins/theme-test-drive/" target="_blank">Theme Test Drive</a> by <a href="http://www.prelovac.com/vladimir/" target="_blank">Vladimir Prelovac</a> in order for the theme switching to work.</Strong>
             <form action="options.php" method="POST">
-                <?php settings_fields( 'jptb_Menu_ID' ); ?>
-                <?php do_settings_sections( 'jptb_Menu_ID' ); ?>
-                <?php submit_button(); ?>
+                <?php
+                    do_settings_sections( 'jptb_settings' );
+                    submit_button();
+                ?>
             </form>
         </div><!-- .wrap -->
         <?php
