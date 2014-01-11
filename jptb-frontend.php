@@ -7,7 +7,7 @@ namespace jptb;
 class frontend {
    function __construct() {
        add_action( 'wp_enqueue_scripts', array( $this, 'scriptsNstyles' ) );
-       add_action( 'wp_footer', array( $this, 'html_bar') );
+       add_action( $this->where(), array( $this, 'html_bar') );
        add_action( 'wp_enqueue_scripts', array( $this, 'inline_style' ) );
    }
 
@@ -140,6 +140,23 @@ class frontend {
         //end the list/ bar
         echo "</ul>";
         echo "</div> <!-- END #jptb-theme-bar -->";
+    }
+
+    /**
+     * Set what hook preview bar is outputted on
+     *
+     * @package jptb
+     * @since 0.0.2
+     */
+    function where() {
+        $where = 'wp_footer';
+        /**
+         * Filter where the bar goes
+         *
+         * @param   string  $where  A hook to output the bar on.
+         */
+        $where = apply_filters( 'jptb_where_bar', $where );
+        return $where;
     }
 }
 
