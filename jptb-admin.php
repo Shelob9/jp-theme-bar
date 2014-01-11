@@ -185,6 +185,32 @@ class admin {
         wp_enqueue_script( 'jptb_colour_script', plugins_url() . '/jptb-theme-bar-pro/jptb_colour.js', array( 'farbtastic', 'jquery' ) );
     }
 
+    /**
+     * Create an array of colours from the settings.
+     *
+     * @package jptb
+     * @since 0.0.2
+     *
+     * @return array $colours All the colours we need for styles
+     */
+    static function colours() {
+        $colours = array(
+            'bg_colour'         => get_option('jptb_bg_colour'),
+            'text_colour'       => get_option('jptb_text_colour'),
+            'label_bg_colour'   => get_option('jptb_label_bg_colour'),
+            'label_text_colour' => get_option('jptb_label_text_colour')
+        );
+        /**
+         * Filter to overide colours for the switcher bar
+         *
+         * @param   array   $colours    An array of colours
+         *
+         * @since 0.0.1
+         */
+        $colours = apply_filters( 'jptb_bar_colours', $colours );
+        return $colours;
+    }
+
     //FORM HTML
     function html() {
         ?>

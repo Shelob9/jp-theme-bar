@@ -15,32 +15,6 @@ class frontend {
    }
 
     /**
-     * Create an array of colours from the settings.
-     *
-     * @package jptb
-     * @since 0.0.2
-     *
-     * @return array $colours All the colours we need for styles
-     */
-    function colours() {
-        $colours = array(
-            'bg_colour'         => get_option('jptb_bg_colour'),
-            'text_colour'       => get_option('jptb_text_colour'),
-            'label_bg_colour'   => get_option('jptb_label_bg_colour'),
-            'label_text_colour' => get_option('jptb_label_text_colour')
-        );
-        /**
-         * Filter to overide colours for the switcher bar
-         *
-         * @param   array   $colours    An array of colours
-         *
-         * @since 0.0.1
-         */
-        $colours = apply_filters( 'jptb_bar_colours', $colours );
-        return $colours;
-    }
-
-    /**
      * Create stylesheet for the actual switcher bar
      *
      * @package jptb
@@ -49,7 +23,7 @@ class frontend {
      * @return  string  $style  The styles for the actual switcher bar.
      */
     function style() {
-        $colours = $this->colours();
+        $colours = admin::colours();
         $style = "
                 #jptb-theme-bar {
                     bottom:0px;
