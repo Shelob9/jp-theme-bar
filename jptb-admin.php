@@ -225,6 +225,33 @@ class admin {
         return $bar_style;
     }
 
+    /**
+     * Build the preview bar
+     *
+     * @package jptb
+     * @since 0.0.2
+     *
+     * @return string   $preview_bar    The preview bar
+     */
+    function preview_bar() {
+        //get the inline style
+        $bar_style = $this->bar_style();
+        $preview_bar = '
+            <div id="jptb_demo" style="'.$bar_style[ 'jptb_demo' ].'">
+                <p id="jptb_demo_p" style="'.$bar_style[ 'jptb_demo_p' ].'</p>
+            </div>
+        ';
+        /**
+         * Overide the preview bar
+         *
+         * @param   string  $preview_bar    The preview bar
+         *
+         * @since 0.0.2
+         */
+        $preview_bar = apply_filters( 'jptb_preview_bar', $preview_bar );
+        return $preview_bar;
+    }
+
     //FORM HTML
     function html() {
         ?>
@@ -266,12 +293,7 @@ class admin {
                     document.getElementById('jptb_demo_p').innerhtml="hello";
                 }
                 </script>
-                <?php
-                    //get the inline style
-                    $bar_style = $this->bar_style();
-                ?>
-                <div id="jptb_demo" style="<?php echo $bar_style[ 'jptb_demo' ]; ?>"><p id="jptb_demo_p" style="<?php echo $bar_style[ 'jptb_demo_p' ]; ?></p></div>
-                <div class=""><strong>Note:</strong> Demo is broken for label colors.</div>
+                <?php echo $this->preview_bar(); ?>
                 <?php submit_button(); ?>
             </form>
         </div><!-- .wrap -->
