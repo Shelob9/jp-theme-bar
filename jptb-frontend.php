@@ -6,9 +6,9 @@ namespace jptb;
 
 class frontend {
    function __construct() {
-       add_action( 'wp_enqueue_scripts', array($this, 'scriptsNstyles') );
-       add_action( 'wp_head', array( $this, 'css') );
+       add_action( 'wp_enqueue_scripts', array( $this, 'scriptsNstyles' ) );
        add_action( 'wp_footer', array( $this, 'html_bar') );
+       add_action( 'wp_enqueue_scripts', array( $this, 'inline_style' ) );
    }
 
     /**
@@ -19,7 +19,7 @@ class frontend {
      */
     function scriptsNstyles() {
        wp_enqueue_script( 'jptb-js', plugin_dir_url( __FILE__ ).'jptb-frontend.js', array('jquery'), null, true );
-       wp_enqueue_style( 'jptb', plugin_dir_url( __FILE__ ).'css/jptb' );
+       wp_enqueue_style( 'jptb', plugin_dir_url( __FILE__ ).'css/jptb.css' );
    }
 
     /**
@@ -32,7 +32,7 @@ class frontend {
      */
     function inline_style() {
         $colours = admin::colours();
-        $style = "
+        $inline_style = "
                 #jptb-theme-bar {
                     background-color: ".$colours[ 'bg_colour'].";
                     color: ".$colours[ 'text_colour' ].";
@@ -56,25 +56,11 @@ class frontend {
          *
          * Use this filter to completely overide the styles being used.
          *
-         * @param   $string $style A style sheet (with no <style></style>
+         * @param   $string $inline_style A style sheet (with no <style></style>
          */
-        $style = apply_filters( 'jptb_bar_style', $style );
-        return $style;
-    }
-
-    /**
-     * Output the stylesheet
-     *
-     * @package jptb
-     * @since 0.0.1
-     */
-    function css() {
-        //create the stylesheet, with tags, using this::style()
-        $css = '<style>';
-        $css .= $this->inline_style();
-        $css .= '</style>';
-        //make it so
-        echo $css;
+        $inline_style = apply_filters( 'jptb_bar_style', $inline_style );
+        //add these styles inline
+        wp_add_inline_style( 'jptb', $inline_style );
     }
 
     /**
