@@ -211,6 +211,20 @@ class admin {
         return $colours;
     }
 
+    function bar_style() {
+        //get the colour options
+        $colours = self::colours();
+        //build each part we need in an var named for its id.
+        $jptb_demo = "height:28px; margin-top:60px; color:".$colours[ 'text_colour' ].";  background-color: ".$colours[ 'bg_colour' ].";";
+        $jptb_demo_p = "padding-left:10px; padding-top:5px; color:".$colours[ 'label_text_colour' ].";";
+        //put each one into an array and return it.
+        $bar_style = array(
+            'jptb_demo'     => $jptb_demo,
+            'jptb_demo_p'   => $jptb_demo_p,
+        );
+        return $bar_style;
+    }
+
     //FORM HTML
     function html() {
         ?>
@@ -252,7 +266,11 @@ class admin {
                     document.getElementById('jptb_demo_p').innerhtml="hello";
                 }
                 </script>
-                <div id="jptb_demo" style="height:28px; margin-top:60px; color:<?php echo get_option('jptb_text_colour'); ?>; background-color:<?php echo get_option('jptb_bg_colour') ?>;"><p id="jptb_demo_p" style="padding-left:10px; padding-top:5px;"><?php echo get_option('jptb_label'); ?></p></div>
+                <?php
+                    //get the inline style
+                    $bar_style = $this->bar_style();
+                ?>
+                <div id="jptb_demo" style="<?php echo $bar_style[ 'jptb_demo' ]; ?>"><p id="jptb_demo_p" style="<?php echo $bar_style[ 'jptb_demo_p' ]; ?></p></div>
                 <div class=""><strong>Note:</strong> Demo is broken for label colors.</div>
                 <?php submit_button(); ?>
             </form>
