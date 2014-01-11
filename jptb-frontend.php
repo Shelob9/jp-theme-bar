@@ -6,12 +6,20 @@ namespace jptb;
 
 class frontend {
    function __construct() {
-       add_action( 'wp_enqueue_scripts', array($this, 'css') );
-       add_action( 'wp_head', array( $this, 'js') );
+       add_action( 'wp_enqueue_scripts', array($this, 'scriptsNstyles') );
+       add_action( 'wp_head', array( $this, 'css') );
        add_action( 'wp_footer', array( $this, 'html_bar') );
    }
-   function js() {
-        wp_enqueue_script( 'jptb-js', plugin_dir_url( __FILE__ ).'jptb-frontend.js', array('jquery'), null, true );
+
+    /**
+     * Add our scripts and styles
+     *
+     * @package jptb
+     * @since 0.0.1
+     */
+    function scriptsNstyles() {
+       wp_enqueue_script( 'jptb-js', plugin_dir_url( __FILE__ ).'jptb-frontend.js', array('jquery'), null, true );
+       wp_enqueue_style( 'jptb', plugin_dir_url( __FILE__ ).'css/jptb' );
    }
 
     /**
@@ -22,7 +30,7 @@ class frontend {
      *
      * @return  string  $style  The styles for the actual switcher bar.
      */
-    function style() {
+    function inline_style() {
         $colours = admin::colours();
         $style = "
                 #jptb-theme-bar {
@@ -95,7 +103,7 @@ class frontend {
     function css() {
         //create the stylesheet, with tags, using this::style()
         $css = '<style>';
-        $css .= $this->style();
+        $css .= $this->inline_style();
         $css .= '</style>';
         //make it so
         echo $css;
