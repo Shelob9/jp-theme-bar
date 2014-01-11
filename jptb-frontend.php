@@ -34,53 +34,21 @@ class frontend {
         $colours = admin::colours();
         $style = "
                 #jptb-theme-bar {
-                    bottom:0px;
-                    position:fixed;
-                    left:0px;
-                    width:100%;
-                    height:28px;
                     background-color: ".$colours[ 'bg_colour'].";
                     color: ".$colours[ 'text_colour' ].";
-                    text-shadow:none;
-                    z-index:9999;
-                }
-
-                #jptb-theme-bar ul, #jptb-theme-bar p {
-                    margin:0;
-                    padding:0;
-                }
-
-                #jptb-theme-bar ul li {
-                    float:left;
-                    list-style:none;
-                    margin-left:10px;
-                    content:'' !important;
-                    content:none !important;
-                }
-
-                #jptb-theme-bar ul li:before {
-                    content:'' !important;
-                    content:none !important;
                 }
 
                 #jptb-theme-bar a, #jptb-theme-bar p {
                     color: ".$colours[ 'text_colour' ].";
-                    text-decoration:none;
-                    line-height:15px;
-                    font: normal 13px/28px sans-serif;
                 }
 
                 #jptb-theme-bar a:hover {
                     color: ".$colours[ 'text_colour' ].";
-                    text-decoration:underline;
                 }
 
                 p#jptb_label {
                     background-color: ".$colours[ 'label_bg_colour' ].";
                     color: ".$colours[ 'label_text_colour' ].";
-                    padding: 0 4px;
-                    left: 0px;
-                    position: absolute;
                 }
             ";
         /**
