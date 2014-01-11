@@ -3,7 +3,7 @@
 Plugin Name: JP Theme Switcher Bar
 Plugin URI: https://github.com/shelob9/jp-theme-bar
 Description: Adds a theme switcher / theme demo bar to the bottom of your site to allow users to switch the theme they see on your site.
-Version: 0.0.1
+Version: 0.0.2
 Author: Josh Pollock
 Author URI: http://www.JoshPress.net
 License: GPLv2+
