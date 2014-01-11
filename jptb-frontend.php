@@ -69,28 +69,39 @@ function css () { ?>
 <?php
     }
 
-
+    /**
+     * The html for the actual bar
+     *
+     * @package jptb
+     * @since 0.0.1
+     */
     function html_bar () {
+        //put site's url in a var.
         $siteurl = get_bloginfo('url');
+        //get an array of themes.
         $themes = wp_get_themes( array(
             'allowed' => true
         ) );
+        //get the label text.
         $barLabel = get_option('jptb_label');
+        //start bar.
         echo "<div id=\"jptb-theme-bar\">";
         echo "<ul>";
+        //the label
         echo "<li>";
-
         echo "<p id='jptb_label'>" . $barLabel . "</p>";
         echo "</li>";
-
-
+        //output each o
         foreach ($themes as $theme ) {
+            //construct info about theme we need.
             $themename = $theme['Name'];
             $noSpaceName = strtr( $themename," -","__" );
             $nocapsname = strtolower($noSpaceName);
             $link = $siteurl."/?theme=".$theme->stylesheet;
+            //Determin if theme is to be included.
             $uniqueOptionName = "jptb_" . $nocapsname;
             $jptb_option_value = get_option($uniqueOptionName);
+
             $switch = "<a href=\"$link\">$themename</a>";
             /**
              * Filter to change the switching link
@@ -107,8 +118,7 @@ function css () { ?>
                 echo "</li>";
             }
         }
-
-        //link to return to normal, end session
+        //end the list/ bar
         echo "</ul>";
         echo "</div> <!-- END #jptb-theme-bar -->";
     }
