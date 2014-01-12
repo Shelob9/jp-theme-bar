@@ -75,8 +75,8 @@ class admin {
             'jptb_label',
             'Label For Theme Bar',
             array( $this, 'label_cb' ),
-            'jptb_other_options',
-            'jptb_themeChoice_sectionID'
+            'jptb_settings',
+            'jptb_other_options'
         );
         register_setting( 'jptb_settings', 'jptb_label' );
 
