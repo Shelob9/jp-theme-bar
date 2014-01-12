@@ -70,6 +70,16 @@ class admin {
             register_setting( 'jptb_settings', $uniqueOptionName );
         }
 
+        //LABEL TEXT TO USE
+        add_settings_field(
+            'jptb_label',
+            'Label For Theme Bar',
+            array( $this, 'label_cb' ),
+            'jptb_other_options',
+            'jptb_themeChoice_sectionID'
+        );
+        register_setting( 'jptb_settings', 'jptb_label' );
+
         //MAIN BG COLOUR
         add_settings_field(
             'jptb_bg_colour',
@@ -109,15 +119,7 @@ class admin {
             'jptb_other_options'
         );
         register_setting( 'jptb_settings', 'jptb_label_text_colour' );
-        //LABEL TEXT TO USE
-        add_settings_field(
-            'jptb_other_options',
-            'Label For Theme Bar',
-            array( $this, 'label_cb' ),
-            'jptb_settings',
-            'jptb_themeChoice_sectionID'
-        );
-        register_setting( 'jptb_settings', 'jptb_label' );
+
 
     }
 
