@@ -143,6 +143,7 @@ class admin {
             $current_label = 'My themes:';
         }
         echo "<input type='text' id='jptb_label' name='jptb_label' onBlur='updateLabelText()' value='" . $current_label . "'/>";
+        echo "<p><em>The text that will preceed the list of themes.</em></p>";
     }
 
     //THEME CHOICE HTML
