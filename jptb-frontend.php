@@ -20,32 +20,6 @@ class frontend {
     function scriptsNstyles() {
        wp_enqueue_script( 'jptb-js', plugin_dir_url( __FILE__ ).'js/jptb.js', array('jquery'), null, true );
        wp_enqueue_style( 'jptb', plugin_dir_url( __FILE__ ).'css/jptb.css' );
-   }
-    /**
-     * Create an array of colours from the settings.
-     *
-     * @package jptb
-     * @since 0.0.2
-     *
-     * @return array $colours All the colours we need for styles
-     */
-    function colours() {
-        $options = $this->options();
-        $colours = array(
-            'bg_colour'         => $options[ 'bg_colour' ],
-            'text_colour'       => $options[ 'text_colour' ],
-            'label_bg_colour'   => $options[ 'label_bg_colour' ],
-            'label_text_colour' => $options[ 'label_text_colour' ],
-        );
-        /**
-         * Filter to override colours for the switcher bar
-         *
-         * @param   array   $colours    An array of colours
-         *
-         * @since 0.0.1
-         */
-        $colours = apply_filters( 'jptb_bar_colours', $colours );
-        return $colours;
     }
 
     /**
@@ -57,7 +31,7 @@ class frontend {
      * @return  string  $style  The styles for the actual switcher bar.
      */
     function inline_style() {
-        $colours = $this->colours();
+        $colours = $this->options();
         $position = "
             #jptb-theme-bar {
                 bottom:0px;
