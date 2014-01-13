@@ -30,14 +30,15 @@ class frontend {
      * @return array $colours All the colours we need for styles
      */
     function colours() {
+        $options = $this->options();
         $colours = array(
-            'bg_colour'         => get_option('jptb_bg_colour'),
-            'text_colour'       => get_option('jptb_text_colour'),
-            'label_bg_colour'   => get_option('jptb_label_bg_colour'),
-            'label_text_colour' => get_option('jptb_label_text_colour')
+            'bg_colour'         => $options[ 'bg_colour' ],
+            'text_colour'       => $options[ 'text_colour' ],
+            'label_bg_colour'   => $options[ 'label_bg_colour' ],
+            'label_text_colour' => $options[ 'label_text_colour' ],
         );
         /**
-         * Filter to overide colours for the switcher bar
+         * Filter to override colours for the switcher bar
          *
          * @param   array   $colours    An array of colours
          *
@@ -111,7 +112,7 @@ class frontend {
      * @package jptb
      * @since 0.0.1
      */
-    static function html_bar () {
+    function html_bar () {
         //put site's url in a var.
         $siteurl = get_bloginfo('url');
         //get an array of themes.
@@ -119,7 +120,8 @@ class frontend {
             'allowed' => true
         ) );
         //get the label text.
-        $barLabel = get_option('jptb_label');
+        $options = $this->options();
+        $barLabel = $options[ 'label' ];
         //start bar.
         echo "<div id=\"jptb-theme-bar\">";
         echo "<ul>";
@@ -127,7 +129,7 @@ class frontend {
         echo "<li>";
         echo "<p id='jptb_label'>" . $barLabel . "</p>";
         echo "</li>";
-        //output each o
+        //output each theme
         foreach ($themes as $theme ) {
             //construct info about theme we need.
             $themename = $theme['Name'];
@@ -137,17 +139,8 @@ class frontend {
             //Determin if theme is to be included.
             $uniqueOptionName = "jptb_" . $nocapsname;
             $jptb_option_value = get_option($uniqueOptionName);
-
+            //create the switch for each one
             $switch = "<a href=\"$link\">$themename</a>";
-            /**
-             * Filter to change the switching link
-             *
-             * This filter allows you to use a different theme switching plugin, or add your own system.
-             *
-             * @param   string    $switch The complete link, anchor tag and all to do the switch.
-             * @since 0.0.2
-             */
-            $switch = apply_filters( 'jptb_switch', $switch );
             if ($jptb_option_value == '1') {
                 echo "<li>";
                 echo $switch;
@@ -174,6 +167,48 @@ class frontend {
          */
         $where = apply_filters( 'jptb_where_bar', $where );
         return $where;
+    }
+
+    /**
+     * The default options
+     *
+     * @package jptb
+     * @since 0.0.2
+     */
+    function default_options() {
+        $defaults = array(
+            'label'                => 'Switch Themes:',
+            'bg_colour'            => '#ffffff',
+            'text_colour'          => '#000000',
+            'label_bg_colour'      => '#000000',
+            'label_text_colour'    => '#ffffff',
+        );
+        return $defaults;
+    }
+
+    /**
+     * Return either default or current option.
+     *
+     * @package jptb
+     * @since 0.0.2
+     */
+    function options() {
+        //get defaults
+        $default = $this->default_options();
+        $options = array(
+            'label'             => get_option( 'jptb_label', 'Switch Themes:' ),
+            'bg_colour'         => get_option( 'jptb_bg_colour', '#ffffff' ),
+            'text_colour'       => get_option( 'jptb_text_colour', $default[ 'text_colour' ] ),
+            'label_bg_colour'   => get_option( 'jptb_label_bg_colour',$default[ 'label_bg_colour' ] ),
+            'label_text_colour' => get_option( 'jptb_label_text_colour', $default[ 'label_text_colour' ] ),
+        );
+        /**
+         * Filter to override options set in database
+         *
+         * @since 0.0.2
+         */
+        $options = apply_filters( 'jptb_options', $options );
+        return $options;
     }
 }
 
