@@ -9,6 +9,7 @@ class frontend {
        add_action( 'wp_enqueue_scripts', array( $this, 'scriptsNstyles' ) );
        add_action( $this->where(), array( $this, 'html_bar') );
        add_action( 'wp_enqueue_scripts', array( $this, 'inline_style' ) );
+       add_filter( 'query_vars', array( $this, 'add_theme_var' ) );
    }
 
     /**
@@ -184,10 +185,23 @@ class frontend {
         /**
          * Filter to override options set in database
          *
+         * @param   array   $options    Array of options.
+         *
          * @since 0.0.2
          */
         $options = apply_filters( 'jptb_options', $options );
         return $options;
+    }
+
+    /**
+     * Make theme a public query bar
+     *
+     * @package jptb
+     * @since 0.0.2
+     */
+    function add_theme_var($public_query_vars) {
+        $public_query_vars[] = 'theme';
+        return $public_query_vars;
     }
 }
 
