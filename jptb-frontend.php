@@ -41,7 +41,7 @@ class frontend {
             }
         ";
         /**
-         * Filter the position of the bar.
+         * Change the CSS for the position of the bar.
          *
          * @param   string  $positioning    The CSS, including selector (#jptb-themebar), to position theme bar.
          *
@@ -73,7 +73,9 @@ class frontend {
          *
          * Use this filter to completely overide the styles being used.
          *
-         * @param   $string $inline_style A style sheet (with no <style></style>
+         * @param   string  $inline_style A style sheet (with no <style></style>
+         *
+         * @since 0.0.2
          */
         $inline_style = apply_filters( 'jptb_bar_inline_style', $inline_style );
         //add these styles inline
@@ -121,8 +123,9 @@ class frontend {
                 echo "</li>";
             }
         }
-        //end the list/ bar
+        //end the list
         echo "</ul>";
+        //end the bar
         echo "</div> <!-- END #jptb-theme-bar -->";
     }
 
@@ -138,6 +141,8 @@ class frontend {
          * Filter where the bar goes
          *
          * @param   string  $where  A hook to output the bar on.
+         *
+         * @since 0.0.2
          */
         $where = apply_filters( 'jptb_where_bar', $where );
         return $where;
@@ -170,8 +175,8 @@ class frontend {
         //get defaults
         $default = $this->default_options();
         $options = array(
-            'label'             => get_option( 'jptb_label', 'Switch Themes:' ),
-            'bg_colour'         => get_option( 'jptb_bg_colour', '#ffffff' ),
+            'label'             => get_option( 'jptb_label', $default[ 'label' ] ),
+            'bg_colour'         => get_option( 'jptb_bg_colour', $default[ 'bg_colour' ] ),
             'text_colour'       => get_option( 'jptb_text_colour', $default[ 'text_colour' ] ),
             'label_bg_colour'   => get_option( 'jptb_label_bg_colour',$default[ 'label_bg_colour' ] ),
             'label_text_colour' => get_option( 'jptb_label_text_colour', $default[ 'label_text_colour' ] ),
