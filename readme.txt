@@ -1,10 +1,12 @@
 === JP Theme Switcher Bar ===
 Contributors: shelob9
-Donate link:
+Donate link: http://JoshPress.net
 Tags: theme, theme-switcher, themes, switcher, demo, live, live demo, theme switcher, theme demo, minimal, simple
 Requires at least: 3.8
 Tested up to: 3.8
 Stable tag: 0.0.2
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Adds a theme switcher/ theme demo bar to the bottom of your site to allow users to switch the theme they see on your site.
 
@@ -13,23 +15,13 @@ Use this plugin to create a demo site for your themes, or use it to allow users 
 
 The JP Theme Bar Plugin adds a theme switching bar to the bottom of your site, perfect for theme preview sites.  The settings page for the plugin lets the end user choose which themes to add, as well as set the colors for the theme bar. You can see it in action on this site.
 
-This plugin is based on the IJM Theme Switcher Bar v2.0 by Iain J McCallum.
+This plugin is based on the [IJM Theme Switcher Bar v2.0](http://iainjmccallum.com/wordpress/live-demo-theme-bar/) by [Iain J McCallum](http://www.iainjmccallum.com/)
 
-IMPORTANT- The plugin Theme Test Drive by Vladimir Prelovac must be installed and activated in order for the theme switching to work.
+IMPORTANT- The plugin [Theme Test Drive](http://wordpress.org/plugins/theme-test-drive/) by [Vladimir Prelovac](http://www.prelovac.com/vladimir/) must be installed and activated in order for the theme switching to work.
+
 
 == Installation ==
 
-= Method 1 =
-= installing from http://wordpress.org/plugins/ijm-theme-bar/ =
-Click "Download Version ..." to download the theme switcher
-Log into your WordPress site.
-Navigate to "Plugins" => "Add New".
-Click on "Upload".
-Choose file, navigate to your downloads folder, select the ijm-theme-bar zip file.
-Click "install now" then "Activate".
-Enjoy your new super-simple theme switcher by going to your website and going theme switcher crazy!
-
-= Method 2 =
 = installing from WordPress. =
 Log into your WordPress site.
 Navigate to "Plugins" => "Add New".
@@ -49,3 +41,25 @@ Each installed theme can be optionally enabled as an option to switch to.
 "Text Colour" - Text colour for the theme switch bar.
 "Label Background Colour" - Background colour for the label section.
 "Label Text Colour" - Text colour for the label.
+== Frequently Asked Questions ==
+
+= Can I Move The Bar To Another Location =
+Yes.
+As of version 0.0.2 there is no option to do this, but there are filters. You can use the filter 'jptb_where_bar' to specify which action the bar is outputted on and you can use the 'jptb_bar_position' to set custom CSS for the positioning, which by default pegs the bar to the bottom of the page.
+For more information see: http://joshpress.net/themes/jp-theme-bar-plugin/jp-theme-bar-filters/
+
+
+== Screenshots ==
+
+1. The colour options in plugin settings page.
+2. Example of the bar in the front end.
+
+== Changelog ==
+
+= 0.0.2 =
+* All code OOP
+* Added Filters
+
+== Upgrade Notice ==
+= 0.0.2 =
+This is the first release.
