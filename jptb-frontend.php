@@ -193,16 +193,6 @@ class frontend {
         return $options;
     }
 
-    /**
-     * Make theme a public query bar
-     *
-     * @package jptb
-     * @since 0.0.2
-     */
-    function add_theme_var($public_query_vars) {
-        $public_query_vars[] = 'theme';
-        return $public_query_vars;
-    }
 }
 
 new frontend();
