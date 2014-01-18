@@ -9,7 +9,6 @@ class frontend {
        add_action( 'wp_enqueue_scripts', array( $this, 'scriptsNstyles' ) );
        add_action( $this->where(), array( $this, 'html_bar') );
        add_action( 'wp_enqueue_scripts', array( $this, 'inline_style' ) );
-       add_filter( 'query_vars', array( $this, 'add_theme_var' ) );
    }
 
     /**
