@@ -22,3 +22,18 @@ require_once( 'jptb-frontend.php' );
 
 //Include Admin
 require_once( 'jptb-admin.php' );
+
+/**
+ * Theme activation hook, creates the option 'jptb_ct' if it does not exist.
+ * This will be important later.
+ *
+ * @package jptb
+ * @since 0.0.3
+ */
+function jptb_activate() {
+    if ( get_option( 'jptb_ct' ) == false ) {
+        add_option( 'jptb_ct', 'This is how we get ants.' );
+    }
+
+}
+register_activation_hook( __FILE__, 'jptb_activate' );
