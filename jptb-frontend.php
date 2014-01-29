@@ -10,6 +10,7 @@ class frontend {
        add_action( $this->where(), array( $this, 'html_bar') );
        add_action( 'wp_enqueue_scripts', array( $this, 'inline_style' ) );
        add_filter( 'query_vars', array( $this, 'add_theme_var' ) );
+       add_action( 'after_theme_setup', array( $this, 'theme_settings') );
    }
 
     /**
@@ -204,6 +205,57 @@ class frontend {
         return $public_query_vars;
     }
 
+    /**
+     * Method to update theme mods or options
+     *
+     * @param array $mods An array of theme mods to update with the key as the name of the mod.
+     * @param array $options    An array of options to update with the key as the name of the option.
+     *
+     * @package jptb
+     * @since 0.0.3
+     */
+    function update( $mods = null, $options ) {
+        if ( !is_null( $mods ) ) {
+            foreach ( $mods as $key=>$data ) {
+                $name = $key;
+                $value = $data;
+                set_theme_mod( $name, $value );
+            }
+        }
+        if (!is_null( $options ) )  {
+            foreach ( $options as $key=>$data ) {
+                $name = $key;
+                $value = $data;
+                if ( get_option( $name ) !== false ) {
+                    update_option( $name, $value );
+                }
+                else {
+                    add_option( $name, $value );
+                }
+            }
+        }
+    }
+
+    /**
+     * Function to update settings when theme is switched.
+     *
+     * @uses this::update()
+     * @package jptb
+     * @since 0.0.3
+     */
+    function theme_settings() {
+        //get the theme with the query var
+        $theme = get_query_var( 'theme' );
+        if ( isset( $theme ) ) {
+            //check if theme has changed
+            if ( $theme != get_option( 'jptb_ct') ) {
+                //do the option to update the theme_mods and/or options for the theme.
+                do_action( 'jpb_theme_settings' . $theme, $mods, $options );
+                //update what is current theme
+                update_option( 'jptb_ct', $theme );
+            }
+        }
+    }
 
 }
 
