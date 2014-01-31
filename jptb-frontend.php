@@ -10,7 +10,8 @@ class frontend {
        add_action( $this->where(), array( $this, 'html_bar') );
        add_action( 'wp_enqueue_scripts', array( $this, 'inline_style' ) );
        add_filter( 'query_vars', array( $this, 'add_theme_var' ) );
-       add_action( 'after_theme_setup', array( $this, 'theme_settings') );
+       add_action( 'init', array( $this, 'theme_settings' ) );
+       add_action( 'wp_head', array( $this, 'print_mods' ) );
    }
 
     /**
@@ -250,11 +251,20 @@ class frontend {
             //check if theme has changed
             if ( $theme != get_option( 'jptb_ct') ) {
                 //do the option to update the theme_mods and/or options for the theme.
-                do_action( 'jpb_theme_settings' . $theme, $mods, $options );
+                do_action( 'jpb_theme_settings_'.$theme, $mods, $options );
+                $this->update( $mods, $options );
                 //update what is current theme
                 update_option( 'jptb_ct', $theme );
             }
         }
+    }
+
+    function print_mods() {
+        echo '<div class="print-mods" style="color:red;font-size:18px;">';
+        print_r(get_theme_mods());
+        echo '<br />';
+        print_r( get_option( 'jptb_ct') );
+        echo '</div>';
     }
 
 }
