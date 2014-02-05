@@ -120,6 +120,16 @@ class admin {
         );
         register_setting( 'jptb_settings', 'jptb_label_text_colour' );
 
+        //LABEL TEXT COLOR
+        add_settings_field(
+            'jptb_mod_switch',
+            'Update Theme Mods',
+            array( $this, 'mod_switch_cb' ),
+            'jptb_settings',
+            'jptb_other_options'
+        );
+        register_setting( 'jptb_settings', 'jptb_mod_switch' );
+
 
     }
 
@@ -199,6 +209,19 @@ class admin {
         echo '<div class="color-picker" style="position: relative;">';
         echo "<input type='text' id='jptb_label_text_colour' name='jptb_label_text_colour'  value='" . $current_tcolour . "'/>";
         echo '<div style="position: absolute; left:190px; bottom:-60px;" id="farb-cp-4"></div></div>';
+    }
+
+
+    //Theme Mod Switch
+    function mod_switch_cb() {
+        $setting = esc_attr( get_option( 'jptb_mod_switch' ) );
+        if ($setting == '1') {
+            $checked = 'checked';
+        } else {
+            $checked = '';
+        }
+        echo "<input type='checkbox' id='jptb_mod_switch' name='jptb_mod_switch' onBlur='updateLabelText()' value='1' $checked />";
+        echo "<p><em>When enabled, the theme_mods will be updated to match the current theme being previewed.</em></p>";
     }
 
     //FORM HTML
