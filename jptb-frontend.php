@@ -128,6 +128,9 @@ class jptb_frontend {
             }
         }
         //end the list
+        if ( $this->end_of_Bar() !== false ) {
+            echo $this->end_of_Bar();
+        }
         echo "</ul>";
         //end the bar
         echo "</div> <!-- END #jptb-theme-bar -->";
@@ -247,6 +250,45 @@ class jptb_frontend {
         }
     }
 
+    /**
+     * Method for appending something to the end of the bar based on current theme being previewed
+     *
+     * @return string| bool Something to append to the theme bar or false if nothing to append.
+     *
+     * @package jptb
+     * @since 0.0.3
+     */
+    function end_of_Bar() {
+        //get the theme with the query var
+        $theme = get_query_var( 'theme' );
+        //get current theme
+        $c_theme = get_stylesheet();
+        //make extra false and then create possibility to change value with filters
+        $extra = false;
+        if ( isset( $theme)  ) {
+            /*
+             * Filter to append something to end of bar for a preview theme
+             *
+             * @param string $extra What to append
+             *
+             * @package jptb
+             * @since 0.0.3
+             */
+            apply_filters( "jptb_end_of_the_bar_{$theme}", $extra );
+        }
+        else{
+            /*
+            * Filter to append something to end of bar for the default theme
+            *
+            * @param string $extra What to append
+            *
+            * @package jptb
+            * @since 0.0.3
+            */
+            apply_filters( "jptb_end_of_the_bar_{$c_theme}", $extra );
+        }
+        return $extra;
+    }
 
 
 }
