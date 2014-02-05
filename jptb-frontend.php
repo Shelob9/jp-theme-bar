@@ -158,7 +158,7 @@ class jptb_frontend {
      * @package jptb
      * @since 0.0.2
      */
-    function default_options() {
+    static function default_options() {
         $defaults = array(
             'label'                => 'Switch Themes:',
             'bg_colour'            => '#ffffff',
@@ -177,7 +177,7 @@ class jptb_frontend {
      */
     function options() {
         //get defaults
-        $default = $this->default_options();
+        $default = self::default_options();
         $options = array(
             'label'             => get_option( 'jptb_label', $default[ 'label' ] ),
             'bg_colour'         => get_option( 'jptb_bg_colour', $default[ 'bg_colour' ] ),

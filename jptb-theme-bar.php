@@ -31,8 +31,11 @@ require_once( 'jptb-admin.php' );
  * @since 0.0.3
  */
 function jptb_activate() {
-    if ( get_option( 'jptb_ct' ) == false ) {
-        add_option( 'jptb_ct', 'This is how we get ants.' );
+    $defaults = jptb_frontend::default_options();
+    foreach ( $defaults as $key=>$data ) {
+        $option= $key;
+        $value = $data;
+        update_option( $option, $value );
     }
 
 }
