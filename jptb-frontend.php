@@ -10,7 +10,9 @@ class frontend {
        add_action( $this->where(), array( $this, 'html_bar') );
        add_action( 'wp_enqueue_scripts', array( $this, 'inline_style' ) );
        add_filter( 'query_vars', array( $this, 'add_theme_var' ) );
-       add_action( 'after_theme_setup', array( $this, 'theme_settings' ) );
+       if ( get_option( 'jptb_mod_switch' ) == 1 ) {
+           add_action( 'after_theme_setup', array( $this, 'theme_settings' ) );
+       }
    }
 
     /**
