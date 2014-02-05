@@ -228,7 +228,7 @@ class jptb_frontend {
     /**
      * Function to update settings when theme is switched.
      *
-     * @todo a filter and/or option to disable this.
+     * @todo a filter to disable this.
      * @package jptb
      * @since 0.0.3
      */
@@ -246,6 +246,8 @@ class jptb_frontend {
             $this->update( $mods );
         }
     }
+
+
 
 }
 
