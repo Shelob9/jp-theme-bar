@@ -7,7 +7,7 @@
  * @since 0.0.2
  */
 
-namespace jptb;
+//namespace jptb;
 
 class admin {
 

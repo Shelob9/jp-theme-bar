@@ -2,7 +2,7 @@
     /**
      * Outputs CSS and JS for front end
      */
-namespace jptb;
+//namespace jptb;
 
 class frontend {
    function __construct() {
