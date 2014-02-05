@@ -9,7 +9,7 @@
 
 //namespace jptb;
 
-class admin {
+class jptb_admin {
 
     function __construct() {
         add_action( 'admin_menu', array( $this, 'jptb_settings_page' ) );
@@ -248,4 +248,4 @@ class admin {
  * @package jptb
  * @author Josh Pollock
  */
-new admin();
+new jptb_admin();

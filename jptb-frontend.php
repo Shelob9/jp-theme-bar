@@ -4,7 +4,7 @@
      */
 //namespace jptb;
 
-class frontend {
+class jptb_frontend {
    function __construct() {
        add_action( 'wp_enqueue_scripts', array( $this, 'scriptsNstyles' ) );
        add_action( $this->where(), array( $this, 'html_bar') );
@@ -249,4 +249,4 @@ class frontend {
 
 }
 
-new frontend();
+new jptb_frontend();
