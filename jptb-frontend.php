@@ -75,7 +75,7 @@ class jptb_frontend {
         /**
          * Filter the styles.
          *
-         * Use this filter to completely overide the styles being used.
+         * Use this filter to completely overide the styles being used or add to the inline styles
          *
          * @param   string  $inline_style A style sheet (with no <style></style>
          *
@@ -127,11 +127,26 @@ class jptb_frontend {
                 echo "</li>";
             }
         }
-        //end the list
-        if ( $this->end_of_Bar() !== false ) {
-            echo $this->end_of_Bar();
-        }
-        echo "</ul>";
+       /*
+       * Append something to the theme list.
+       *
+       * Be sure to wrap it in <li></li>!
+       *
+       * @package jptb
+       * @since 0.0.3
+       */
+       do_action( 'jptb_end_of_the_list' );
+       //end the list
+       echo "</ul>";
+       /*
+       * Append something to end of bar.
+       *
+       * Be sure to style the container for this!
+       *
+       * @package jptb
+       * @since 0.0.3
+       */
+        do_action( 'jptb_end_of_the_bar' );
         //end the bar
         echo "</div> <!-- END #jptb-theme-bar -->";
     }
@@ -200,12 +215,12 @@ class jptb_frontend {
     }
 
     /**
-     * Make theme a public query bar
+     * Make theme a public query var
      *
      * @package jptb
      * @since 0.0.3
      */
-    function add_theme_var($public_query_vars) {
+    function add_theme_var( $public_query_vars ) {
         $public_query_vars[] = 'theme';
         return $public_query_vars;
     }
@@ -231,7 +246,7 @@ class jptb_frontend {
     /**
      * Function to update settings when theme is switched.
      *
-     * @todo a filter to disable this.
+     * @todo how to get this to run only when it needs to.
      * @package jptb
      * @since 0.0.3
      */
@@ -248,46 +263,6 @@ class jptb_frontend {
             $mods = get_option( "theme_mods_{$c_theme}" );
             $this->update( $mods );
         }
-    }
-
-    /**
-     * Method for appending something to the end of the bar based on current theme being previewed
-     *
-     * @return string| bool Something to append to the theme bar or false if nothing to append.
-     *
-     * @package jptb
-     * @since 0.0.3
-     */
-    function end_of_Bar() {
-        //get the theme with the query var
-        $theme = get_query_var( 'theme' );
-        //get current theme
-        $c_theme = get_stylesheet();
-        //make extra false and then create possibility to change value with filters
-        $extra = false;
-        if ( isset( $theme)  ) {
-            /*
-             * Filter to append something to end of bar for a preview theme
-             *
-             * @param string $extra What to append
-             *
-             * @package jptb
-             * @since 0.0.3
-             */
-            apply_filters( "jptb_end_of_the_bar_{$theme}", $extra );
-        }
-        else{
-            /*
-            * Filter to append something to end of bar for the default theme
-            *
-            * @param string $extra What to append
-            *
-            * @package jptb
-            * @since 0.0.3
-            */
-            apply_filters( "jptb_end_of_the_bar_{$c_theme}", $extra );
-        }
-        return $extra;
     }
 
 
