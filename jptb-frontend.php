@@ -13,6 +13,10 @@ class jptb_frontend {
        if ( get_option( 'jptb_mod_switch' ) == 1 ) {
            add_action( 'after_theme_setup', array( $this, 'theme_settings' ) );
        }
+       $filters = $this->link_filters();
+       foreach ( $filters as $filter ) {
+           add_filter( $filter, array( $this, 'keep_query_var' ) );
+       }
    }
 
     /**
@@ -263,6 +267,70 @@ class jptb_frontend {
             $mods = get_option( "theme_mods_{$c_theme}" );
             $this->update( $mods );
         }
+    }
+
+    /**
+     * Keep the query var for links
+     *
+     * @package jptb
+     * @since 0.0.3
+     */
+    function keep_query_var( $link ) {
+        //get the theme with the query var
+        $theme = get_query_var( 'theme' );
+        //set to current stylesheet if none is being previewed.
+        if ( $theme === '' ) {
+            $theme = get_stylesheet();
+        }
+        $link = add_query_arg( 'theme', $theme, $link );
+        return $link;
+    }
+
+    /**
+     * A list of filters to hook $this->keep_query_var() to
+     *
+     * @return array|bool|mixed|void
+     * @package jptb
+     * @since 0.0.3
+     */
+    function link_filters() {
+        //this list adapted from http://stackoverflow.com/a/3474234/1469799
+        //Thanks Mike Schinkel!
+        $filters = array(
+            'page_link',
+            'post_link',
+            'term_link',
+            'tag_link',
+            'category_link',
+            'post_type_link',
+            'attachment_link',
+            'year_link',
+            'month_link',
+            'day_link',
+            'search_link',
+            'index_rel_link',
+            'parent_post_rel_link',
+            'previous_post_rel_link',
+            'next_post_rel_link',
+            'start_post_rel_link',
+            'end_post_rel_link',
+            'previous_post_link',
+            'next_post_link',
+            'get_pagenum_link',
+            'get_comments_pagenum_link',
+            'shortcut_link',
+            'get_shortlink',
+        );
+
+        /**
+         * Filter which links get the theme query var added on to
+         *
+         * @since 0.0.3
+         *
+         * @param array $filters list of link fitlers
+         */
+        $filters = apply_filters( 'jptb_links_to_filter', $filters );
+        return $filters;
     }
 
 
