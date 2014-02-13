@@ -214,7 +214,8 @@ class jptb_frontend {
          *
          * @since 0.0.2
          */
-        $options = apply_filters( 'jptb_options', $options );
+        $filtered_options = apply_filters( 'jptb_options', $options );
+        $options = array_merge( $options, $filtered_options );
         return $options;
     }
 
