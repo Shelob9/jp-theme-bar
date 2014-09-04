@@ -3,8 +3,8 @@ Contributors: shelob9
 Donate link: http://JoshPress.net
 Tags: theme, theme-switcher, themes, switcher, demo, live, live demo, theme switcher, theme demo, minimal, simple
 Requires at least: 3.8
-Tested up to: 3.8
-Stable tag: 0.0.3
+Tested up to: 4.0
+Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -72,6 +72,8 @@ For more information see: http://joshpress.net/themes/jp-theme-bar-plugin/jp-the
 This is the first release.
 = 0.0.3 =
 This version improves the usefulness of the plugin by updating theme mods and not reverting back to default theme when following an internal link.
+= 0.1.0 =
+Makes plugin translation ready.
 
 
 
