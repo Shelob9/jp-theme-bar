@@ -1,0 +1,53 @@
+# Copyright (C) 2014 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/jp-theme-bar\n"
+"POT-Creation-Date: 2014-09-04 19:12:07+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: jptb-admin.php:41
+msgid "Which Themes Do You Want To Show?"
+msgstr ""
+
+#: jptb-admin.php:48
+msgid "Additional Options"
+msgstr ""
+
+#: jptb-admin.php:76
+msgid "Label For Theme Bar"
+msgstr ""
+
+#: jptb-admin.php:86
+msgid "Background Colour"
+msgstr ""
+
+#: jptb-admin.php:96
+msgid "Text Colour"
+msgstr ""
+
+#: jptb-admin.php:105
+msgid "jptb_label_bg_colour"
+msgstr ""
+
+#: jptb-admin.php:116
+msgid "Label Text Colour"
+msgstr ""
+
+#: jptb-admin.php:126
+msgid "Update Theme Mods"
+msgstr ""
+
+#: jptb-admin.php:156
+msgid "The text that will go before the list of themes."
+msgstr ""
+
+#: jptb-admin.php:231
+msgid "JP Theme Bar Settings"
+msgstr ""
