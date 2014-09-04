@@ -8,6 +8,8 @@ Author: Josh Pollock
 Author URI: http://www.JoshPress.net
 License: GPLv2+
 License URI:   http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: jptb
+Domain Path: /languages
 */
 /**
  * Copyright 2013 Josh Pollock
