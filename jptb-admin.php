@@ -38,14 +38,14 @@ class jptb_admin {
 
         add_settings_section(
             'jptb_theme_choice',
-            'Which Themes Do You Want To Show?',
+            __( 'Which Themes Do You Want To Show?', 'jptb' ),
             array( $this, 'themeChoice_HTML' ),
             'jptb_settings'
         );
 
         add_settings_section(
             'jptb_other_options',
-            'Additional Options',
+            __( 'Additional Options', 'jptb' ),
             array( $this, 'other_options_HTML' ),
             'jptb_settings'
         );
@@ -73,7 +73,7 @@ class jptb_admin {
         //LABEL TEXT TO USE
         add_settings_field(
             'jptb_label',
-            'Label For Theme Bar',
+            __( 'Label For Theme Bar', 'jptb' ),
             array( $this, 'label_cb' ),
             'jptb_settings',
             'jptb_other_options'
@@ -83,7 +83,7 @@ class jptb_admin {
         //MAIN BG COLOUR
         add_settings_field(
             'jptb_bg_colour',
-            'Background Colour',
+            _( 'Background Colour', 'jptb' ),
             array( $this, 'bg_cb' ),
             'jptb_settings',
             'jptb_other_options'
@@ -93,7 +93,7 @@ class jptb_admin {
         //MAIN TXT COLOUR
         add_settings_field(
             'jptb_text_colour',
-            'Text Colour',
+            __( 'Text Colour', 'jptb' ),
             array( $this, 'txt_cb' ),
             'jptb_settings',
             'jptb_other_options'
@@ -102,7 +102,7 @@ class jptb_admin {
 
         //LABEL BG COLOUR
         add_settings_field(
-            'jptb_label_bg_colour',
+            __( 'jptb_label_bg_colour', 'jptb' ),
             'Label Background Colour',
             array( $this, 'label_bg_cb' ),
             'jptb_settings',
@@ -113,7 +113,7 @@ class jptb_admin {
         //LABEL TEXT COLOR
         add_settings_field(
             'jptb_label_text_colour',
-            'Label Text Colour',
+            __( 'Label Text Colour', 'jptb' ),
             array( $this, 'label_txt_cb' ),
             'jptb_settings',
             'jptb_other_options'
@@ -123,7 +123,7 @@ class jptb_admin {
         //LABEL TEXT COLOR
         add_settings_field(
             'jptb_mod_switch',
-            'Update Theme Mods',
+            __( 'Update Theme Mods', 'jptb' ),
             array( $this, 'mod_switch_cb' ),
             'jptb_settings',
             'jptb_other_options'
@@ -153,7 +153,7 @@ class jptb_admin {
             $current_label = 'My themes:';
         }
         echo "<input type='text' id='jptb_label' name='jptb_label' onBlur='updateLabelText()' value='" . $current_label . "'/>";
-        echo "<p><em>The text that will preceed the list of themes.</em></p>";
+        echo "<p><em>".__( 'The text that will go before the list of themes.', 'jptb' )."</em></p>";
     }
 
     //THEME CHOICE HTML
@@ -228,8 +228,10 @@ class jptb_admin {
     function html() {
         ?>
         <div class="wrap">
-            <h2>JP Theme Bar Settings</h2>
-            <Strong>This plugin requires the plugin <a href="http://wordpress.org/plugins/theme-test-drive/" target="_blank">Theme Test Drive</a> by <a href="http://www.prelovac.com/vladimir/" target="_blank">Vladimir Prelovac</a> in order for the theme switching to work.</Strong>
+            <h2><?php _e( 'JP Theme Bar Settings', 'jptb' ); ?></h2>
+            <Strong>
+				<?php _e( sprintf( 'This plugin requires the plugin %1s by 2%s in order for the theme switching to work.', '<a href="http://wordpress.org/plugins/theme-test-drive/" target="_blank">Theme Test Drive</a>', '<a href="http://www.prelovac.com/vladimir/" target="_blank">Vladimir Prelovac</a>' ), 'jptb' ); ?>
+			</Strong>
             <form action="options.php" method="POST">
                 <?php
                     settings_fields( 'jptb_settings' );
