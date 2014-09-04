@@ -83,7 +83,7 @@ class jptb_admin {
         //MAIN BG COLOUR
         add_settings_field(
             'jptb_bg_colour',
-            _( 'Background Colour', 'jptb' ),
+            __( 'Background Colour', 'jptb' ),
             array( $this, 'bg_cb' ),
             'jptb_settings',
             'jptb_other_options'
@@ -230,7 +230,7 @@ class jptb_admin {
         <div class="wrap">
             <h2><?php _e( 'JP Theme Bar Settings', 'jptb' ); ?></h2>
             <Strong>
-				<?php _e( sprintf( 'This plugin requires the plugin %1s by 2%s in order for the theme switching to work.', '<a href="http://wordpress.org/plugins/theme-test-drive/" target="_blank">Theme Test Drive</a>', '<a href="http://www.prelovac.com/vladimir/" target="_blank">Vladimir Prelovac</a>' ), 'jptb' ); ?>
+				<?php _e( sprintf( 'This plugin requires the plugin %1s by %2s in order for the theme switching to work.', '<a href="http://wordpress.org/plugins/theme-test-drive/" target="_blank">Theme Test Drive</a>', '<a href="http://www.prelovac.com/vladimir/" target="_blank">Vladimir Prelovac</a>' ), 'jptb' ); ?>
 			</Strong>
             <form action="options.php" method="POST">
                 <?php
