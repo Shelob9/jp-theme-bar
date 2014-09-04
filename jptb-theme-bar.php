@@ -42,3 +42,15 @@ function jptb_activate() {
 
 }
 register_activation_hook( __FILE__, 'jptb_activate' );
+
+
+/**
+ * Default initialization for the default textdomain.
+ *
+ * @since 0.1
+ */
+function jptb_init_domain() {
+	$locale = apply_filters( 'plugin_locale', get_locale(), 'jptb' );
+	load_textdomain( 'jptb', WP_LANG_DIR . '/jptb/jptb-' . $locale . '.mo' );
+	load_plugin_textdomain( 'jptb', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
