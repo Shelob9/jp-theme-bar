@@ -102,8 +102,8 @@ class jptb_admin {
 
         //LABEL BG COLOUR
         add_settings_field(
-            __( 'jptb_label_bg_colour', 'jptb' ),
-            'Label Background Colour',
+            'jptb_label_bg_colour',
+           	__(  'Label Background Colour', 'jptb' ),
             array( $this, 'label_bg_cb' ),
             'jptb_settings',
             'jptb_other_options'
@@ -221,7 +221,7 @@ class jptb_admin {
             $checked = '';
         }
         echo "<input type='checkbox' id='jptb_mod_switch' name='jptb_mod_switch' onBlur='updateLabelText()' value='1' $checked />";
-        echo "<p><em>When enabled, the theme_mods will be updated to match the current theme being previewed.</em></p>";
+        echo "<p><em>"._( 'When enabled, the theme_mods will be updated to match the current theme being previewed', 'jptb' )."</em></p>";
     }
 
     //FORM HTML
